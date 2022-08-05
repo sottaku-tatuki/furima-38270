@@ -2,6 +2,7 @@
 postage = 送料
 description = 説明
 prefecture = 県
+municipalities = 市区町村
 
 ## users テーブル
 
@@ -18,24 +19,22 @@ prefecture = 県
 
 ### Association
 
-- has_many   :itemes  dependent: :destroy
+- has_many   :items   dependent: :destroy
 - has_many   :orders  dependent: :destroy
-- belongs_to :address dependent: :destroy
-- belongs_to :card    dependent: :destroy
 
 ## items テーブル
 
-| Column        | Type    | Options                        |
-| ------------- | ------- | ------------------------------ |
-| name          | string  | null: false                    |
-| description   | string  | null: false                    |
-| status        | string  | null: false                    |
-| shipping_days | string  | null: false                    |
-| postage       | string  | null: false                    |
-| price         | integer | null: false                    |
-| prefecture_id | integer | null: false, foreign_key: true |
-| category_id   | integer | null: false, foreign_key: true |
-| user_id       | integer | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| name          | string     | null: false                    |
+| description   | text       | null: false                    |
+| shipping_days | string     | null: false                    |
+| postage       | string     | null: false                    |
+| price         | integer    | null: false                    |
+| status_id     | integer    | null: false, foreign_key: true |
+| prefecture_id | integer    | null: false, foreign_key: true |
+| category_id   | integer    | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -46,47 +45,29 @@ prefecture = 県
 
 ## adresses テーブル
 
-| Column           | Type    | Options                        |
-| ---------------- | ------- | ------------------------------ |
-| family_name      | string  | null: false                    |
-| first_name       | string  | null: false                    |
-| family_name_kana | string  | null: false                    |
-| first_name_kana  | string  | null: false                    |
-| post_code        | string  | null: false                    |
-| city             | string  | null: false                    |
-| building_name    | string  |                                |
-| phone_number     | string  | null: false                    |
-| order_id         | integer | null: false, foreign_key: true |
-| user_id          | integer | null: false, foreign_key: true |
-| prefecture_id    | integer | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| post_code        | string     | null: false                    |
+| municipalities   | string     | null: false                    |
+| house_number     | string     | null: false                    |
+| building_name    | string     |                                |
+| phone_number     | string     | null: false                    |
+| order            | references | null: false, foreign_key: true |
+| prefecture_id    | integer    | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- belongs_to_active_hash :prefecture
 - belongs_to :order
 
 ## orders テーブル
 
-| Column      | Type    | Options                        |
-| ----------- | ------- | ------------------------------ |
-| item_id     | integer | null: false  foreign_key: true |
-| user_id     | integer | null: false, foreign_key: true |
-| adress_id   | integer | null: false, foreign_key: true |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| item     | references | null: false  foreign_key: true |
+| user     | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :adress
-
-## cards テーブル
-
-| Column      | Type    | Options                        |
-| ----------- | ------- | ------------------------------ |
-| card_id     | integer | null: false                    |
-| user_id     | integer | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
+- has_one    :adress
