@@ -19,28 +19,31 @@ municipalities = 市区町村
 
 ### Association
 
-- has_many   :items   dependent: :destroy
-- has_many   :orders  dependent: :destroy
+- has_many   :items
+- has_many   :orders
 
 ## items テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| name          | string     | null: false                    |
-| description   | text       | null: false                    |
-| shipping_days | string     | null: false                    |
-| postage       | string     | null: false                    |
-| price         | integer    | null: false                    |
-| status_id     | integer    | null: false, foreign_key: true |
-| prefecture_id | integer    | null: false, foreign_key: true |
-| category_id   | integer    | null: false, foreign_key: true |
-| user          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| name            | string     | null: false                    |
+| description     | text       | null: false                    |
+| price           | integer    | null: false                    |
+| shipping_day_id | integer    | null: false, foreign_key: true |
+| postage_id      | integer    | null: false, foreign_key: true |
+| status_id       | integer    | null: false, foreign_key: true |
+| prefecture_id   | integer    | null: false, foreign_key: true |
+| category_id     | integer    | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to_active_hash :category
+- belongs_to_active_hash :shipping_day
+- belongs_to_active_hash :postage
+- belongs_to_active_hash :status
 - belongs_to_active_hash :prefecture
+- belongs_to_active_hash :category
 - has_one :order
 
 ## adresses テーブル
