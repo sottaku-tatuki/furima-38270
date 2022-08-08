@@ -29,11 +29,11 @@ municipalities = 市区町村
 | name            | string     | null: false                    |
 | description     | text       | null: false                    |
 | price           | integer    | null: false                    |
-| shipping_day_id | integer    | null: false, foreign_key: true |
-| postage_id      | integer    | null: false, foreign_key: true |
-| status_id       | integer    | null: false, foreign_key: true |
-| prefecture_id   | integer    | null: false, foreign_key: true |
-| category_id     | integer    | null: false, foreign_key: true |
+| shipping_day_id | integer    | null: false,                   |
+| postage_id      | integer    | null: false,                   |
+| status_id       | integer    | null: false,                   |
+| prefecture_id   | integer    | null: false,                   |
+| category_id     | integer    | null: false,                   |
 | user            | references | null: false, foreign_key: true |
 
 ### Association
@@ -46,7 +46,7 @@ municipalities = 市区町村
 - belongs_to_active_hash :category
 - has_one :order
 
-## adresses テーブル
+## addresses テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
@@ -56,7 +56,7 @@ municipalities = 市区町村
 | building_name    | string     |                                |
 | phone_number     | string     | null: false                    |
 | order            | references | null: false, foreign_key: true |
-| prefecture_id    | integer    | null: false, foreign_key: true |
+| prefecture_id    | integer    | null: false,                   |
 
 ### Association
 
@@ -73,4 +73,4 @@ municipalities = 市区町村
 
 - belongs_to :item
 - belongs_to :user
-- has_one    :adress
+- has_one    :address
