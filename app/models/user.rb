@@ -2,7 +2,7 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname      
     validates :birth_day  
-    with_options format: { with: /\A[ぁ-んァ-ン一-龥]/ } do
+    with_options format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/ } do
       validates :family_name   
       validates :first_name
     end
@@ -18,6 +18,6 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: "は半角英数を両方含む必要があります"}
 
-  has_many :items
-  has_many :orders
+  # has_many :items
+  # has_many :orders
 end
