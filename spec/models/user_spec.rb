@@ -69,20 +69,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password は半角英数を両方含む必要があります')
       end
-      it 'パスワードが数字のみでは登録できない' do
-        @user.password = '123456'
-        @user.password_confirmation = @user.password
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password は半角英数を両方含む必要があります')
-      end
       it '全角文字を含むパスワードでは登録できない' do
         @user.password = 'あいうえおか'
         @user.password_confirmation = @user.password
         @user.valid?
         expect(@user.errors.full_messages).to include('Password は半角英数を両方含む必要があります')
       end
-    end
-    context '新規登録本人情報確認' do
       it 'first_nameが空では登録できない' do
         @user.first_name = ''
         @user.valid?
