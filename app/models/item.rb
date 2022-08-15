@@ -10,11 +10,13 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  # has_one    :order
 
   belongs_to :category
   belongs_to :prefecture
   belongs_to :status
   belongs_to :shipping_day
+  belongs_to :postage
 
   #ジャンルの選択が「---」の時は保存できないようにする
   with_options numericality: { other_than: 0, message: "can't be blank"} do
