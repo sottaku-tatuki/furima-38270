@@ -128,7 +128,7 @@
 
       <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to items_path(item) do %>
+        <%= link_to "#" do %>
         <div class='item-img-content'>
         <%= image_tag item.image.variant(resize: '400x400'), class: "item-img" if item.image.attached? %>
 
