@@ -3,10 +3,11 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-    validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
     validates :description
     validates :image
   end
+
+  validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
 
   belongs_to :user
   has_one_attached :image

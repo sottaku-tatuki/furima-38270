@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
@@ -23,9 +23,20 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # 出品者かつ未購入品のみedit可能になる機能は後に実装
+    if @item.user_id == current_user.id
+    else
+      redirect_to root_path
+    end
   end
 
   def update
+    @item.update(item_params)
+    if @item.valid?
+      redirect_to item_path(item_params)
+    else
+      render 'edit'
+    end
   end
 
   private
