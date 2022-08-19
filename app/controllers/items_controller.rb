@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
 
   def edit
     # 出品者かつ未購入品のみedit可能になる機能は後に実装
-    if @item.user_id == current_user.id
+    if @item.user_id == current_user.id && @item.order.nil?
     else
       redirect_to root_path
     end
