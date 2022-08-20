@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
 
   def edit
     # 出品者かつ未購入品のみedit可能になる機能は後に実装
-    if @item.user_id == current_user.id && @item.order.nil?
+    if same_person && @item.order.nil?
     else
       redirect_to root_path
     end
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user_id == current_user.id
+    if same_person
       @item.destroy
       redirect_to root_path
     else
@@ -55,6 +55,10 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def same_person
+    @item.user_id == current_user.id
   end
   
 end

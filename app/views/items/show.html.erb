@@ -36,7 +36,6 @@
           <%= link_to "削除", item_path(@item), method: :delete, class:"item-destroy" %>
           <%# 購入済み商品に売り切れを表示 %>
         <% elsif @item.order.present? %>
-          <%= link_to "売り切れました",item_path(@item),class:"disabled-button bold" %>
         <%# 非出品者であり未購入品時に表示 %>
         <% else %>
           <%= link_to "購入画面に進む", item_orders_path(@item) ,class:"item-red-btn"%>
